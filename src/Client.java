@@ -1,19 +1,34 @@
 
+//File after refactoring
 public class Client {
 
+	
+	//Extract Constants
+	private static final int HALL_PRICE = 50;
+	private static final int PLATE_PRICE = 200;
+	private static final int TICKET_PRICE = 20;
+	
 	String userName,password,address,dob;
 	
-	String H_type,H_Addon1,H_Addon2;
-	int H_capacity;
+	//Renamed Varibles to meaningful names
+	String Hall_type,Hall_Addon1,Hall_Addon2;
+	int Hall_capacity;
 	
-	String C_type,C_Addon1,C_Addon2;
-	int C_capacity;
-	String t_mode,t_type;
-	int t_capacity,t_quantity,TAX;
+	String Catering_type,Catering_Addon1,Catering_Addon2;
+	int Catering_capacity;
+	
+	String transport_mode,transport_type;
+	int transport_capacity,transport_quantity,TAX;
 	
 	
 	public Client(String userName, String password, String address, String dob) {
 		// TODO Auto-generated constructor stub
+		Intialise_Client(userName, password, address, dob);
+	}
+
+
+	//Extract method
+	private void Intialise_Client(String userName, String password, String address, String dob) {
 		this.userName = userName;
 		this.password = password;
 		this.address = address;
@@ -22,35 +37,53 @@ public class Client {
 	
 	
 
-	public void BookHall(String Hall_type, int H_capacity, String H_Addon1, String H_Addon2) {
+	public void BookHall(String H_type, int H_capacity, String H_Addon1, String H_Addon2) {
 		// TODO Auto-generated method stub
-		this.H_type = H_type;
-		this.H_capacity = H_capacity;
-		this.H_Addon1 = H_Addon1;
-		this.H_Addon2 = H_Addon2;
+		Intialise_Hall(H_type, H_capacity, H_Addon1, H_Addon2);
+	}
+
+
+	//Extract method
+	private void Intialise_Hall(String H_type, int H_capacity, String H_Addon1, String H_Addon2) {
+		this.Hall_type = H_type;
+		this.Hall_capacity = H_capacity;
+		this.Hall_Addon1 = H_Addon1;
+		this.Hall_Addon2 = H_Addon2;
 	}
 	
 	public void Catering(String C_type, int C_capacity, String C_Addon1, String C_Addon2) {
 		// TODO Auto-generated method stub
-		this.C_type = C_type;
-		this.C_capacity = C_capacity;
-		this.C_Addon1 = C_Addon1;
-		this.C_Addon2 = C_Addon2;
+		Intialise_Catering(C_type, C_capacity, C_Addon1, C_Addon2);
+	}
+
+
+	//Extract method
+	private void Intialise_Catering(String C_type, int C_capacity, String C_Addon1, String C_Addon2) {
+		this.Catering_type = C_type;
+		this.Catering_capacity = C_capacity;
+		this.Catering_Addon1 = C_Addon1;
+		this.Catering_Addon2 = C_Addon2;
 	}
 
 	public void transport(String t_mode, int t_capacity, String t_type, int t_quantity) {
 		// TODO Auto-generated method stub
-		this.t_mode = t_mode;
-		this.t_capacity = t_capacity;
-		this.t_type = t_type;
-		this.t_quantity = t_quantity;
+		Intialise_transport(t_mode, t_capacity, t_type, t_quantity);
+	}
+
+
+	//Extract method
+	private void Intialise_transport(String t_mode, int t_capacity, String t_type, int t_quantity) {
+		this.transport_mode = t_mode;
+		this.transport_capacity = t_capacity;
+		this.transport_type = t_type;
+		this.transport_quantity = t_quantity;
 	}
 
 	public int Hall_Bill() {
 		// TODO Auto-generated method stub
 		int total_Hall_Bill =0 ;
 		TAX=0;
-		total_Hall_Bill = H_capacity * 50;
+		total_Hall_Bill = Hall_capacity * HALL_PRICE;
 		
 		TAX = (total_Hall_Bill/100)*20;
 		total_Hall_Bill = total_Hall_Bill + TAX;
@@ -62,7 +95,7 @@ public class Client {
 	public int Catering_Bill() {
 		// TODO Auto-generated method stub
 		int total_Cat_Bill =0 ;TAX=0;
-		total_Cat_Bill = C_capacity * 200;
+		total_Cat_Bill = Catering_capacity * PLATE_PRICE;
 		
 		TAX = (total_Cat_Bill/100)*20;
 		total_Cat_Bill = total_Cat_Bill + TAX;
@@ -74,7 +107,7 @@ public class Client {
 	public int transport_Bill() {
 		// TODO Auto-generated method stub
 		int total_trans_Bill =0 ;TAX=0;
-		total_trans_Bill = (t_capacity * 20) * t_quantity;
+		total_trans_Bill = (transport_capacity * TICKET_PRICE) * transport_quantity;
 		
 		TAX = (total_trans_Bill/100)*20;
 		total_trans_Bill = total_trans_Bill + TAX;
